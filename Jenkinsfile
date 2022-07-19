@@ -39,16 +39,14 @@ node {
         sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
         sh 'helm install prometheus prometheus-community/prometheus'
         sh 'kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-np'
-    }*/
+    }
     stage("granfana"){
         sh 'helm repo add bitnami https://charts.bitnami.com/bitnami'
         sh 'helm install grafana bitnami/grafana'
         sh 'kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-np'
-    }
+    }*/
     stage("Deploy React application"){
-        sh 'helm repo add helmchart https://github.com/NDThuong/poc2.git'
-        sh 'helm repo update'
-        sh 'helm install thuongapp poc2/oneforall'
+        sh 'helm install thuongapp oneforall'
         sh 'minikube addons enable ingress'
     }
 }
