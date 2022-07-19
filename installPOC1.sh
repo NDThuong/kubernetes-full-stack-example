@@ -13,8 +13,10 @@ sudo apt install openjdk-11-jre-headless
     
 
 #minikube
-     curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     sudo install minikube-linux-amd64 /usr/local/bin/minikube
+    minikube delete
+    minikube start --driver=none --kubernetes-version v1.23.8
     
 #kubectl
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -22,7 +24,11 @@ sudo apt install openjdk-11-jre-headless
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 #helm
-
+    wget https://get.helm.sh/helm-v3.4.1-linux-amd64.tar.gz
+    tar xvf helm-v3.4.1-linux-amd64.tar.gz
+    sudo mv linux-amd64/helm /usr/local/bin
+    rm helm-v3.4.1-linux-amd64.tar.gz
+    rm -rf linux-amd64
 
 #istio
     helm repo add istio https://istio-release.storage.googleapis.com/charts
