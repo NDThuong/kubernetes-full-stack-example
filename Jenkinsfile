@@ -27,12 +27,12 @@ node {
         sh 'docker push ndthuong/student-app-client'
     }
     stage("istio"){
-        /*sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
+        sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
         sh 'helm repo update'
-        sh 'kubectl create namespace istio-system'
+        sh 'kubectl create namespace istio-system --overwrite'
         sh 'helm install istio-base istio/base -n istio-system'
-        sh 'helm install istiod istio/istiod -n istio-system --wait'*/
-        sh 'kubectl label namespace istio-ingress istio-injection=enabled --overwrite'
+        sh 'helm install istiod istio/istiod -n istio-system --wait'
+        sh 'kubectl label namespace default istio-injection=enabled --overwrite'
         sh 'helm repo add yaml https://github.com/NDThuong/kubernetes-full-stack-example.git'
         sh 'helm install istio-ingress istio/gateway -n istio-ingress -f yaml/dieuthuong.yaml'
     }
