@@ -29,8 +29,3 @@ sudo apt install openjdk-11-jre-headless
     sudo mv linux-amd64/helm /usr/local/bin
     rm helm-v3.4.1-linux-amd64.tar.gz
     rm -rf linux-amd64
-
-#istio
-    helm repo add istio https://istio-release.storage.googleapis.com/charts
-    helm repo update
-    kubectl create namespace istio-system
