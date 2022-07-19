@@ -27,13 +27,14 @@ node {
         sh 'docker push ndthuong/student-app-client'
     }
     stage("istio"){
-        /*sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
+        sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
         sh 'helm repo update'
         sh 'kubectl create namespace istio-system'
-        sh 'helm install istio-base istio/base -n istio-system'
-        sh 'helm install istiod istio/istiod -n istio-system --wait'
-        sh 'kubectl label namespace istio-ingress istio-injection=enabled'*/
-        sh 'helm install istio-ingress istio/gateway -n istio-ingress -f dieuthuong.yaml'
+        sh 'helm install istio-base istio/base -n istio-system --overight'
+        sh 'helm install istiod istio/istiod -n istio-system --wait --overight'
+        sh 'kubectl label namespace istio-ingress istio-injection=enabled --overight'
+        sh 'helm repo add yaml https://github.com/NDThuong/kubernetes-full-stack-example.git'
+        sh 'helm install istio-ingress istio/gateway -n istio-ingress -f yaml/dieuthuong.yaml'
     }
     stage("prometheus"){
         sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
