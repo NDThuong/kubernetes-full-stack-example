@@ -47,6 +47,5 @@ node {
     }*/
     stage("Deploy React application"){
         sh 'helm install thuongapp oneforall'
-        sh 'minikube addons enable ingress'
     }
 }
