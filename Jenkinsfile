@@ -29,7 +29,7 @@ node {
     stage("istio"){
         sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
         sh 'helm repo update'
-        //sh 'kubectl create namespace istio-system'
+        sh 'kubectl create namespace istio-system'
         sh 'helm install istio-base istio/base -n istio-system'
         sh 'helm install istiod istio/istiod -n istio-system --wait'
         sh 'kubectl label namespace default istio-injection=enabled --overwrite'
