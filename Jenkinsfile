@@ -32,8 +32,8 @@ node {
         sh 'kubectl create namespace istio-system'
         sh 'helm install istio-base istio/base -n istio-system'
         sh 'helm install istiod istio/istiod -n istio-system --wait'
-        sh 'kubectl label namespace default istio-injection=enabled --overwrite'*/
-        sh 'helm install istio-ingress istio/gateway -f dieuthuong.yaml'
+        sh 'kubectl label namespace default istio-injection=enabled --overwrite'
+        sh 'helm install istio-ingress istio/gateway -f dieuthuong.yaml'*/
     }
    /* stage("prometheus"){
         sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
