@@ -41,12 +41,12 @@ node {
         //sh 'kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-np'
        //sh 'minikube service prometheus-server-np'
     }
-    stage("granfana"){
+    /*stage("granfana"){
         sh 'helm repo add bitnami https://charts.bitnami.com/bitnami'
         sh 'helm upgrade grafana bitnami/grafana --install'
         //sh 'kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-np'
         //sh 'minikube service grafana-np'
-    }
+    }*/
     stage("Deploy React application"){
         sh 'helm upgrade thuongapp oneforall --install'
     }
