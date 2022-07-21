@@ -45,6 +45,6 @@ node {
         //sh 'minikube service grafana-np'
     }
     stage("Deploy React application"){
-        sh 'helm upgrade thuongapp oneforall --install'
+        sh 'helm upgrade thuongapp oneforall --install' 
     }
 }
