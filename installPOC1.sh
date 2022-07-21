@@ -10,13 +10,15 @@ sudo apt install openjdk-11-jre-headless
     sudo service jenkins status
 
 #docker
-    
+    sudo apt-get install docker.io
+    sudo systemctl start docker
+    sudo usermod -a -G docker $USER
+    sudo usermod -a -G docker ubuntu
+    sudo usermod -aG docker jenkins
 
 #minikube
     curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     sudo install minikube-linux-amd64 /usr/local/bin/minikube
-    minikube delete
-    minikube start --driver=none --kubernetes-version v1.23.8
     
 #kubectl
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
