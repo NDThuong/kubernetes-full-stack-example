@@ -13,7 +13,7 @@ node {
         }
 
         dir ("react-student-management-web-app"){
-            sh 'docker build -t tiennguyenhcl/student-app-client .'
+            sh 'docker build -t ndthuong/student-app-client .'
         }
     }
 
