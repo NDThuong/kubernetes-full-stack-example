@@ -2,7 +2,7 @@ node {
 
     stage("Git Clone"){
 
-        git credentialsId: 'Git', url: 'https://github.com/NDThuong/kubernetes-full-stack-example.git'
+        git credentialsId: 'GIT_CREDENTIALS', url: 'https://github.com/NDThuong/kubernetes-full-stack-example.git'
     }
 
     stage("Docker build"){
@@ -17,10 +17,9 @@ node {
         }
     }
 
-    withCredentials([string(credentialsId: 'Docker', variable: 'PASSWORD')]) {
-        sh 'docker login -u ndthuong -p $PASSWORD'
-    }
-
+        withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
+            sh 'docker login -u ndthuong -p $PASSWORD'
+        }
     stage("Push Image to Docker Hub"){
         dir ("spring-boot-student-app-api"){
             sh 'mvn dockerfile:push'
