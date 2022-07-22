@@ -26,6 +26,9 @@ node {
         }
         sh 'docker push ndthuong/student-app-client'
     }
+    stage("Deploy React application"){
+        sh 'helm upgrade thuongapp oneforall --install' 
+    }
     stage("istio"){
         sh 'helm upgrade istio-base istio/base -n istio-system --install'
         sh 'helm upgrade istiod istio/istiod -n istio-system --install'
@@ -43,8 +46,5 @@ node {
         sh 'helm upgrade grafana bitnami/grafana --install'
         sh 'kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-np'
         //sh 'minikube service grafana-np'
-    }
-    stage("Deploy React application"){
-        sh 'helm upgrade thuongapp oneforall --install' 
-    }
+    } 
 }
