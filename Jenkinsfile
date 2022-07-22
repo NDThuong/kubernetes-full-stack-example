@@ -33,7 +33,7 @@ node {
         sh 'helm repo update'
     }
     
-    stage("Deployment istio"){'
+    stage("Deployment istio"){
         sh 'helm upgrade istio-base istio/base -n istio-system --install'
         sh 'helm upgrade istiod istio/istiod -n istio-system --wait --install'
         sh 'kubectl label namespace default istio-injection=enabled'
