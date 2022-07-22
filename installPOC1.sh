@@ -12,8 +12,8 @@ sudo apt install openjdk-11-jre-headless
 #docker
     sudo apt-get install docker.io
     sudo systemctl start docker
-    sudo usermod -a -G docker $USER
-    sudo usermod -a -G docker ubuntu
+    sudo usermod -aG docker $USER
+    sudo usermod -aG docker ubuntu
     sudo usermod -aG docker jenkins
 
 #minikube
