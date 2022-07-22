@@ -2,7 +2,7 @@ node {
 
     stage("Git Clone"){
 
-        git credentialsId: 'Git', url: 'https://github.com/NguyenTienHCL/kubernetes-full-stack-example.git'
+        git credentialsId: 'Git', url: 'https://github.com/NDThuong/kubernetes-full-stack-example.git'
     }
 
     stage("Docker build"){
@@ -18,14 +18,14 @@ node {
     }
 
     withCredentials([string(credentialsId: 'Docker', variable: 'PASSWORD')]) {
-        sh 'docker login -u tiennguyenhcl -p $PASSWORD'
+        sh 'docker login -u ndthuong -p $PASSWORD'
     }
 
     stage("Push Image to Docker Hub"){
         dir ("spring-boot-student-app-api"){
             sh 'mvn dockerfile:push'
         }
-        sh 'docker push tiennguyenhcl/student-app-client'
+        sh 'docker push ndthuong/student-app-client'
     }
     stage("Add repo"){
         sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
