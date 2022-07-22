@@ -27,7 +27,6 @@ node {
         sh 'docker push ndthuong/student-app-client'
     }
     stage("istio"){
-        sh 'helm repo update'
         sh 'helm install istio-base istio/base -n istio-system '
         sh 'helm upgrade istiod istio/istiod -n istio-system --wait --install'
         sh 'kubectl label namespace default istio-injection=enabled --overwrite'
