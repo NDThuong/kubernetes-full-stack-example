@@ -1,17 +1,21 @@
 #java
-sudo apt-get update
-sudo apt install openjdk-11-jre-headless
+    sudo apt-get update -y
+    sudo apt install openjdk-11-jre-headless
 
 #jenkins
     wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
     sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-    sudo apt-get update
-    sudo apt-get install jenkins
+    sudo apt-get install jenkins -y
     sudo service jenkins status
 
 #docker
-    sudo apt-get install docker.io
-    sudo systemctl start docker
+    sudo apt install apt-transport-https ca-certificates curl software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    apt-cache policy docker-ce
+    sudo apt install docker-ce -y
+    sudo systemctl status docker
+    sudo usermod -aG docker ${USER}
     sudo usermod -aG docker $USER
     sudo usermod -aG docker ubuntu
     sudo usermod -aG docker jenkins
@@ -26,8 +30,8 @@ sudo apt install openjdk-11-jre-headless
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 #helm
-    wget https://get.helm.sh/helm-v3.4.1-linux-amd64.tar.gz
-    tar xvf helm-v3.4.1-linux-amd64.tar.gz
-    sudo mv linux-amd64/helm /usr/local/bin
-    rm helm-v3.4.1-linux-amd64.tar.gz
-    rm -rf linux-amd64
+    curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+    sudo apt-get install apt-transport-https --yes
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+    sudo apt-get update
+    sudo apt-get install helm
