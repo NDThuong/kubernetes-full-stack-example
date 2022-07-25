@@ -13,7 +13,7 @@ node {
         }
 
         dir ("react-student-management-web-app"){
-            sh 'docker build -t ndthuong/student-app-client .'
+            sh 'docker build -t ndthuong/student-app-client:1.0.1 .'
         }
     }
 
@@ -24,7 +24,7 @@ node {
         dir ("spring-boot-student-app-api"){
             sh 'mvn dockerfile:push'
         }
-        sh 'docker push ndthuong/student-app-client'
+        sh 'docker push ndthuong/student-app-client:1.0.1'
     }
     stage("Deploy React application"){
         sh 'helm upgrade thuongapp oneforall --install'
