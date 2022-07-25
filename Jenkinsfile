@@ -1,9 +1,9 @@
 node {
 
-    stage("Git Clone"){
+//     stage("Git Clone"){
 
-        git credentialsId: 'GIT_CREDENTIALS', url: 'https://github.com/NDThuong/kubernetes-full-stack-example.git'
-    }
+//         git credentialsId: 'GIT_CREDENTIALS', url: 'https://github.com/NDThuong/kubernetes-full-stack-example.git'
+//     }
 
     stage("Docker build"){
         sh 'docker version'
@@ -26,9 +26,17 @@ node {
         }
         sh 'docker push ndthuong/student-app-client'
     }
+    stage("istio"){
+        sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
+        sh 'helm upgrade istio-base istio/base -n istio-system --install'
+        sh 'helm upgrade istiod istio/istiod -n istio-system --wait --install'
+        sh 'kubectl label namespace default istio-injection=enabled --overwrite'
+        sh 'helm upgrade istio-ingress istio/gateway -f dieuthuong.yaml --install'
+        sh 'kubectl apply -f gateway.yaml'
+    }
     stage("Deploy React application"){
         sh 'helm upgrade thuongapp oneforall --install'
-        sh 'helm upgrade istio-ingress istio/gateway -f dieuthuong.yaml --install'
+        
         
     }
    stage("prometheus"){
@@ -42,12 +50,4 @@ node {
         
     }
     
-    stage("istio"){
-        sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
-        sh 'helm repo update'
-        sh 'helm upgrade istio-base istio/base -n istio-system --install'
-        sh 'helm upgrade istiod istio/istiod -n istio-system --wait --install'
-        sh 'kubectl label namespace default istio-injection=enabled --overwrite'
-        sh 'kubectl apply -f gateway.yaml'
-    }
 }
