@@ -29,6 +29,7 @@ node {
     stage("Deploy React application"){
         sh 'helm upgrade thuongapp oneforall --install'
         sh 'helm upgrade istio-ingress istio/gateway -f dieuthuong.yaml --install'
+        sh 'kubectl apply -f gateway.yaml'
     }
    stage("prometheus"){
         sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
