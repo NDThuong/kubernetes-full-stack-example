@@ -28,6 +28,7 @@ node {
     }
     stage("Deploy React application"){
         sh 'helm upgrade thuongapp oneforall --install'
+        sh 'helm upgrade istio-ingress istio/gateway -f dieuthuong.yaml --install'
     }
    stage("prometheus"){
         sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
@@ -46,6 +47,5 @@ node {
         sh 'helm upgrade istio-base istio/base -n istio-system --install'
         sh 'helm upgrade istiod istio/istiod -n istio-system --wait --install'
         sh 'kubectl label namespace default istio-injection=enabled --overwrite'
-        sh 'helm upgrade istio-ingress istio/gateway -f dieuthuong.yaml --install'
     }
 }
