@@ -24,7 +24,7 @@ node {
         sh 'helm upgrade istiod istio/istiod -n istio-system --wait --install'
         sh 'kubectl label namespace default istio-injection=enabled --overwrite'
         sh 'helm upgrade istio-ingress istio/gateway -f dieuthuong.yaml --install'
-        sh 'kubectl apply -f gateway.yaml'
+
     }
     stage("Deploy React application"){
         sh 'helm upgrade thuongapp oneforall -f oneforall/values.yaml --install'  
