@@ -27,7 +27,7 @@ spec:
       - uri:
           prefix: '/api'
       rewrite:
-          uri: '/'
+        uri: '/'
       route:
       - destination:
           host: student-app-api.default.svc.cluster.local
