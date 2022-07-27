@@ -3,7 +3,7 @@ node {
         sh 'docker version'
 
         dir ("spring-boot-student-app-api"){
-            sh 'mvn -f spring-boot-student-app-api/pom.xml install'
+            sh 'mvn install'
         }
         dir ("react-student-management-web-app"){
             sh 'docker build -t ndthuong/student-app-client:1.0.5 .'
