@@ -10,7 +10,7 @@ node {
             sh 'mvn install'
         }
         dir ("react-student-management-web-app"){
-            sh 'docker build -t ndthuong/student-app-client:1.0.7 .'
+            sh 'docker build -t ndthuong/student-app-client:1.0.10 .'
         }
     }
         withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
@@ -20,7 +20,7 @@ node {
         dir ("spring-boot-student-app-api"){
             sh 'mvn dockerfile:push'
         }
-        sh 'docker push ndthuong/student-app-client:1.0.7'
+        sh 'docker push ndthuong/student-app-client:1.0.10'
     }
     stage("istio"){
         sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
