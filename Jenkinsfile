@@ -1,4 +1,8 @@
 node {
+    stage("Git Clone"){
+
+        git credentialsId: 'Git', url: 'https://github.com/NDThuong/kubernetes-full-stack-example.git'
+    }
     stage("Docker build"){
         sh 'docker version'
 
