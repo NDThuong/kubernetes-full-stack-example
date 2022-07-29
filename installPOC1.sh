@@ -14,7 +14,6 @@
     apt-cache policy docker-ce
     sudo apt install docker-ce -y
     sudo systemctl start docker
-    sudo usermod -aG docker ${USER}
     sudo usermod -aG docker $USER
     sudo usermod -aG docker ubuntu
     sudo usermod -aG docker jenkins
@@ -23,6 +22,7 @@
 #minikube
     curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     sudo install minikube-linux-amd64 /usr/local/bin/minikube
+    sud apt install conntrack -y
     
 #kubectl
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
